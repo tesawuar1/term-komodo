@@ -53,22 +53,29 @@ same filename and re-open the pages (no need to re-run `generate.py` for this).
 ## Hosting on your subdomain
 
 These are plain static files — upload the whole folder (keeping the `assets/`
-subfolder alongside the HTML files) to any static host or your subdomain's web root:
+subfolder alongside the HTML files, plus the `.htaccess` file at the root) to any
+static host or your subdomain's web root:
 
-- Netlify / Vercel: drag-and-drop the folder, or connect a Git repo.
-- Any cPanel / shared hosting: upload via FTP into the subdomain's `public_html`.
-- Cloudflare Pages, GitHub Pages, S3 + CloudFront — all work the same way.
+- Hostinger / any cPanel / shared Apache or LiteSpeed hosting: upload via File
+  Manager or FTP into the subdomain's `public_html` — make sure the hidden
+  `.htaccess` file gets uploaded too (some FTP clients hide dotfiles by default).
+- Netlify / Vercel / Cloudflare Pages: drag-and-drop the folder, or connect a Git repo.
 
-Once live at your subdomain (e.g. `terms.komodoandko.com`), send guests the direct
-link to the relevant trip page:
+The included `.htaccess` strips the `.html` extension from the URL (Apache/LiteSpeed
+only — it has no effect on Netlify/Vercel/Cloudflare, which don't read `.htaccess`;
+those platforms have their own redirect/rewrite settings if you need the same there).
+
+Once live at your subdomain (e.g. `terms.komodoandko.com`), send guests the direct,
+extension-free link to the relevant trip page:
 
 ```
-https://terms.komodoandko.com/full-day-trip.html
-https://terms.komodoandko.com/open-trip.html
-https://terms.komodoandko.com/private-trip.html
+https://terms.komodoandko.com/full-day-trip
+https://terms.komodoandko.com/open-trip
+https://terms.komodoandko.com/private-trip
 ```
 
-or send `index.html` if you'd like them to pick the trip type themselves.
+or send the bare domain if you'd like them to pick the trip type themselves —
+`index.html` is served automatically at the root by virtually every host.
 
 ## Editing the legal text later
 
